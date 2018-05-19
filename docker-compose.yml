@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  database:
+    image: mdillon/postgis
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=nearby_beer
+      - POSTGRES_USER=ze_delivery
+      - POSTGRES_PASSWORD=s3cr3t
