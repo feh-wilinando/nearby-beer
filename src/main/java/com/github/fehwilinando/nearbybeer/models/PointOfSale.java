@@ -4,13 +4,41 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 import org.springframework.util.Assert;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Entity(name = "points_of_sale")
 public class PointOfSale {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @NotEmpty
+    @Column(name = "trading_name")
     private String tradingName;
+
+    @NotEmpty
+    @Column(name = "owner_name")
     private String ownerName;
+
+    @NotEmpty
+    @Column(unique = true)
     private String document;
+
+    @NotNull
     private Point address;
+
+    @NotNull
+    @Column(name = "coverage_area")
     private MultiPolygon coverageArea;
 
+    /**
+     * @deprecated frameworks only
+     */
+    @Deprecated
+    PointOfSale() { }
 
     public PointOfSale(String tradingName, String ownerName, String document, Point address, MultiPolygon coverageArea) {
 
@@ -49,5 +77,9 @@ public class PointOfSale {
 
     public MultiPolygon getCoverageArea() {
         return (MultiPolygon) coverageArea.clone();
+    }
+
+    public Integer getId() {
+        return id;
     }
 }
