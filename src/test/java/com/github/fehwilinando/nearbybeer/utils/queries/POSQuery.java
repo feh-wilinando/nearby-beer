@@ -2,8 +2,6 @@ package com.github.fehwilinando.nearbybeer.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -15,15 +13,15 @@ public class POSQuery {
 
 
     POSQuery(JsonReader reader) throws IOException {
-        Resource resource = new FileSystemResource("src/test/resources/graphql/input/queries/pos.json");
-
-        query = reader.readResource(resource);
+        query = reader.readFile("src/test/resources/graphql/input/queries/pos.json");
     }
 
 
-    public JsonNode setId(Long id){
+    public void setId(Long id){
         ((ObjectNode) query.get("variables")).put("id", id);
+    }
 
+    public JsonNode getJson(){
         return query;
     }
 }

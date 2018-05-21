@@ -7,4 +7,10 @@ type POS {
 
 type Query {
     pos(id: ID!): POS
+    nearby_beer(coordinate: Coordinate!): [POS]!
+}
+
+input Coordinate {
+    latitude: Float!
+    longitude: Float!
 }
