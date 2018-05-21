@@ -1,0 +1,10 @@
+type POS {
+    id: ID!
+    tradingName: String!
+    ownerName: String!
+    document: String!
+}
+
+type Query {
+    pos(id: ID!): POS
+}
