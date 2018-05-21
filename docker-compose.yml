@@ -5,7 +5,9 @@ services:
     image: mdillon/postgis
     ports:
       - "5432:5432"
+    volumes:
+      - ./postgres-init-scripts:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_DB=nearby_beer
+      - POSTGRES_MULTIPLE_DATABASES=nearby_beer,nearby_beer_test
       - POSTGRES_USER=ze_delivery
       - POSTGRES_PASSWORD=s3cr3t
