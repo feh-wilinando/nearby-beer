@@ -1,0 +1,17 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "Variable 'id' has coerced Null value for NonNull type 'ID!'",
+      "path": null,
+      "extensions": null,
+      "locations": [
+        {
+          "line": 1,
+          "column": 8
+        }
+      ],
+      "errorType": "ValidationError"
+    }
+  ]
+}

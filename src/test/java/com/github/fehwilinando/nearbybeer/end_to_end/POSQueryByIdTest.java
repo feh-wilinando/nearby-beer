@@ -1,20 +1,13 @@
 package com.github.fehwilinando.nearbybeer.end_to_end;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fehwilinando.nearbybeer.utils.GraphQLTestUtils;
-import com.github.fehwilinando.nearbybeer.utils.JsonReader;
-import com.github.fehwilinando.nearbybeer.utils.POSQuery;
+import com.github.fehwilinando.nearbybeer.utils.queries.POSQuery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
@@ -26,26 +19,18 @@ public class POSQueryByIdTest {
     private GraphQLTestUtils graphQL;
 
     @Autowired
-    private JsonReader reader;
-
-    @Autowired
     private POSQuery query;
 
 
     @Test
     public void shouldGetAPointOfSaleWithExistingId() {
 
-        JsonNode jsonQuery = query.setId(1L);
+        query.setId(1L);
 
-        ResponseEntity<JsonNode> response = graphQL.requestWith(jsonQuery);
-
-        assertThatResponseWithNoErrors(response);
-
-        FileSystemResource expectedFile = new FileSystemResource("src/test/resources/graphql/output/queries/pos_of_id_1.json");
-
-        JsonNode expectedResult = reader.readResource(expectedFile);
-
-        assertThat(response.getBody()).isEqualTo(expectedResult);
+        graphQL
+                .request(query.getJson())
+                    .successfully()
+                        .resultMatchWith("src/test/resources/graphql/output/queries/pos_of_id_1.json");
 
     }
 
@@ -54,41 +39,26 @@ public class POSQueryByIdTest {
     @Test
     public void shouldGetAnErrorWithNotExistingId() {
 
-        JsonNode jsonQuery = query.setId(52L);
+        query.setId(52L);
 
-        ResponseEntity<JsonNode> response = graphQL.requestWith(jsonQuery);
-
-        assertThatResponseWithErrors(response);
-
-        FileSystemResource expectedFile = new FileSystemResource("src/test/resources/graphql/output/queries/pos_of_not_existing_id.json");
-
-        JsonNode expectedResult = reader.readResource(expectedFile);
-
-        assertThat(response.getBody()).isEqualTo(expectedResult);
-
+        graphQL
+                .request(query.getJson())
+                    .withErrors()
+                        .resultMatchWith("src/test/resources/graphql/output/queries/pos_of_not_existing_id.json");
     }
 
 
-    private void assertThatResponseWithNoErrors(ResponseEntity<JsonNode> response){
+    @Test
+    public void shouldGetAnErrorWhenIdIsNull(){
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        query.setId(null);
 
-        boolean hasNoFieldErrors = response.getBody().path("errors").isMissingNode();
 
-        assertThat(hasNoFieldErrors)
-                .as("response has field 'errors'")
-                    .isTrue();
-    }
+        graphQL
+                .request(query.getJson())
+                    .withErrors()
+                        .resultMatchWith("src/test/resources/graphql/output/queries/pos_null_id.json");
 
-    private void assertThatResponseWithErrors(ResponseEntity<JsonNode> response){
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-
-        boolean hasNoFieldErrors = response.getBody().path("errors").isMissingNode();
-
-        assertThat(hasNoFieldErrors)
-                .as("response has no field 'errors'")
-                    .isFalse();
     }
 
 }

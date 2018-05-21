@@ -14,15 +14,21 @@ import java.net.URI;
 public class GraphQLTestUtils {
 
     private final TestRestTemplate restTemplate;
+    private final JsonReader reader;
     private final String graphQLEndpoint;
 
-    public GraphQLTestUtils(TestRestTemplate restTemplate, @Value("${graphql.servlet.mapping:/graphql}") String graphQLEndpoint) {
+    public GraphQLTestUtils(TestRestTemplate restTemplate, JsonReader reader, @Value("${graphql.servlet.mapping:/graphql}") String graphQLEndpoint) {
         this.restTemplate = restTemplate;
+        this.reader = reader;
         this.graphQLEndpoint = graphQLEndpoint;
     }
 
 
-    public ResponseEntity<JsonNode> requestWith(JsonNode input){
+    public GraphQLResponseBuilder request(JsonNode json){
+        return new GraphQLResponseBuilder(makeRequest(json), reader);
+    }
+
+    private ResponseEntity<JsonNode> makeRequest(JsonNode input){
         RequestEntity<JsonNode> request = RequestEntity.post(URI.create(graphQLEndpoint))
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .accept(MediaType.APPLICATION_JSON)
@@ -30,4 +36,9 @@ public class GraphQLTestUtils {
 
         return restTemplate.exchange(request, JsonNode.class);
     }
+
+
+
+
+
 }

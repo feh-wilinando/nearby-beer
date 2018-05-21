@@ -2,6 +2,7 @@ package com.github.fehwilinando.nearbybeer.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,16 @@ public class JsonReader {
         this.mapper = mapper;
     }
 
+    public JsonNode readFile(String file){
+        FileSystemResource resource = new FileSystemResource(file);
+        return read(resource);
+    }
+
     public JsonNode readResource(Resource resource){
+        return read(resource);
+    }
+
+    private JsonNode read(Resource resource) {
         try {
             return mapper.readTree(resource.getFile());
         } catch (IOException e) {
