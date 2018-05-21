@@ -99,7 +99,15 @@
             <version>5.0.0</version>
         </dependency>
 
-	</dependencies>
+        <!-- https://mvnrepository.com/artifact/com.bedatadriven/jackson-datatype-jts -->
+        <dependency>
+            <groupId>com.bedatadriven</groupId>
+            <artifactId>jackson-datatype-jts</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+
+    </dependencies>
 
 	<build>
 		<plugins>

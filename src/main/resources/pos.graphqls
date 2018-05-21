@@ -5,12 +5,35 @@ type POS {
     document: String!
 }
 
+input Coordinate {
+    latitude: Float!
+    longitude: Float!
+}
+
 type Query {
     pos(id: ID!): POS
     nearby_beer(coordinate: Coordinate!): [POS]!
 }
 
-input Coordinate {
-    latitude: Float!
-    longitude: Float!
+input Address {
+    type: String!
+    coordinates: [Float]!
+}
+
+input CoverageArea {
+    type: String!
+    coordinates: [[[[Float]]]]!
+
+}
+
+input NewPOS {
+    tradingName: String!
+    ownerName: String!
+    document: String!
+    address: Address!
+    coverageArea: CoverageArea!
+}
+
+type Mutation {
+    createPOS(pos: NewPOS!): POS
 }

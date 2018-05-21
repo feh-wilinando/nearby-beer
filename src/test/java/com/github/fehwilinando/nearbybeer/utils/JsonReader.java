@@ -3,7 +3,6 @@ package com.github.fehwilinando.nearbybeer.utils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,20 +18,28 @@ public class JsonReader {
         this.mapper = mapper;
     }
 
+    private FileSystemResource getFileSystemResource(String file) {
+        return new FileSystemResource(file);
+    }
+
     public JsonNode readFile(String file){
-        FileSystemResource resource = new FileSystemResource(file);
-        return read(resource);
-    }
+        FileSystemResource resource = getFileSystemResource(file);
 
-    public JsonNode readResource(Resource resource){
-        return read(resource);
-    }
-
-    private JsonNode read(Resource resource) {
         try {
             return mapper.readTree(resource.getFile());
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
     }
+
+    public <T> T readFile(String file, Class<T> clazz){
+        FileSystemResource resource = getFileSystemResource(file);
+
+        try {
+            return mapper.readValue(resource.getFile(), clazz);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity(name = "points_of_sale")
 public class PointOfSale {
@@ -81,5 +82,18 @@ public class PointOfSale {
 
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PointOfSale that = (PointOfSale) o;
+        return Objects.equals(document, that.document);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(document);
     }
 }
