@@ -1,0 +1,17 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "Variable 'lng' has coerced Null value for NonNull type 'Float!'",
+      "path": null,
+      "extensions": null,
+      "locations": [
+        {
+          "line": 1,
+          "column": 22
+        }
+      ],
+      "errorType": "ValidationError"
+    }
+  ]
+}

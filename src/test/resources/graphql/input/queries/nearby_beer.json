@@ -1,0 +1,7 @@
+{
+  "query": "query ($lat: Float!, $lng: Float!) { nearby_beer(coordinate: {latitude: $lat, longitude: $lng}){ id tradingName ownerName document } }",
+  "variables": {
+    "lat": null,
+    "lng": null
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "Variable 'lat' has coerced Null value for NonNull type 'Float!'",
+      "path": null,
+      "extensions": null,
+      "locations": [
+        {
+          "line": 1,
+          "column": 8
+        }
+      ],
+      "errorType": "ValidationError"
+    }
+  ]
+}

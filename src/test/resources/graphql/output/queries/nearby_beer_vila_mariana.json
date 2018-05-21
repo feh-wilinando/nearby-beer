@@ -1,0 +1,30 @@
+{
+  "data": {
+    "nearby_beer": [
+      {
+        "id": "41",
+        "tradingName": "Adega Sao Paulo",
+        "ownerName": "Rai da Silva",
+        "document": "26.091.851/0001-80"
+      },
+      {
+        "id": "40",
+        "tradingName": "Ze Repoe",
+        "ownerName": "Leonardo Cruz",
+        "document": "25.175.276/0001-31"
+      },
+      {
+        "id": "13",
+        "tradingName": "Adega do Joao",
+        "ownerName": "Messi Pele",
+        "document": "10.144.318/0001-08"
+      },
+      {
+        "id": "48",
+        "tradingName": "Bar do Ze",
+        "ownerName": "Daniel Henrique",
+        "document": "62638527000101"
+      }
+    ]
+  }
+}
