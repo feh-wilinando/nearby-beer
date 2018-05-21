@@ -1,0 +1,23 @@
+{
+  "data": {
+    "pos": null
+  },
+  "errors": [
+    {
+      "message": "POS with id 52 not found!",
+      "path": [
+        "pos"
+      ],
+      "extensions": {
+        "invalid-POS-id": 52
+      },
+      "locations": [
+        {
+          "line": 1,
+          "column": 19
+        }
+      ],
+      "errorType": "DataFetchingException"
+    }
+  ]
+}

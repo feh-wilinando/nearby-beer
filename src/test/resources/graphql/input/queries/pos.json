@@ -1,0 +1,4 @@
+{
+  "query": "query ($id:ID!) { pos(id:$id){ id tradingName ownerName document } }",
+  "variables": {"id" : null}
+}
