@@ -11,7 +11,7 @@ Uma api em graphql para encotrar os ponto de vendas (de cervejas) mais próximo 
 
 **(Todos os comandos citados abaixo devem ser executados na raíz do projeto)**
 
-Caso não tenha um postgres instalado e devidamente configurado. Podemos rodar-lo atráves do 
+Caso não tenha um postgres instalado e devidamente configurado. Podemos rodar-lo através do 
 __docker-compose__ com o seguinte comando: `docker-compose up`.  O arquivo __docker-compose.yml__ criar duas bases de 
 dados (uma para a aplicação e uma para rodar os testes) com postgis habilitado
 
