@@ -1,0 +1,21 @@
+{
+  "data": {
+    "createPOS": null
+  },
+  "errors": [
+    {
+      "message": "Document 123.123.123-123 already exist!",
+      "path": [
+        "createPOS"
+      ],
+      "extensions": null,
+      "errorType": "DataFetchingException",
+      "locations": [
+        {
+          "line": 1,
+          "column": 28
+        }
+      ]
+    }
+  ]
+}

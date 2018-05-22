@@ -1,6 +1,7 @@
 package com.github.fehwilinando.nearbybeer.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.github.fehwilinando.nearbybeer.utils.queries.Query;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.MediaType;
@@ -24,8 +25,10 @@ public class GraphQLTestUtils {
     }
 
 
-    public GraphQLResponseBuilder request(JsonNode json){
-        return new GraphQLResponseBuilder(makeRequest(json), reader);
+    public GraphQLResponseBuilder request(Query query){
+        ResponseEntity<JsonNode> response = makeRequest(query.getJson());
+
+        return new GraphQLResponseBuilder(response, reader);
     }
 
     private ResponseEntity<JsonNode> makeRequest(JsonNode input){

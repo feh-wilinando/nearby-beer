@@ -30,7 +30,7 @@ public class NearByBeerTest {
         String fileResult = "src/test/resources/graphql/output/queries/nearby_beer_vila_mariana.json";
 
         graphQL
-            .request(query.getJson())
+            .request(query)
                     .successfully()
                         .resultMatchWith(fileResult);
     }
@@ -44,7 +44,7 @@ public class NearByBeerTest {
         String fileResult = "src/test/resources/graphql/output/queries/nearby_beer_empty.json";
 
         graphQL
-                .request(query.getJson())
+                .request(query)
                     .successfully()
                         .resultMatchWith(fileResult);
     }
@@ -60,7 +60,7 @@ public class NearByBeerTest {
         String fileResult = "src/test/resources/graphql/output/queries/nearby_beer_null_latitude.json";
 
         graphQL
-                .request(query.getJson())
+                .request(query)
                     .withErrors()
                         .resultMatchWith(fileResult);
     }
@@ -74,7 +74,7 @@ public class NearByBeerTest {
         String fileResult = "src/test/resources/graphql/output/queries/nearby_beer_null_latitude.json";
 
         graphQL
-                .request(query.getJson())
+                .request(query)
                     .withErrors()
                         .resultMatchWith(fileResult);
     }
@@ -89,7 +89,7 @@ public class NearByBeerTest {
         String fileResult = "src/test/resources/graphql/output/queries/nearby_beer_null_longitude.json";
 
         graphQL
-                .request(query.getJson())
+                .request(query)
                     .withErrors()
                         .resultMatchWith(fileResult);
     }

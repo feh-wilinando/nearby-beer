@@ -28,7 +28,7 @@ public class POSQueryByIdTest {
         query.setId(1L);
 
         graphQL
-                .request(query.getJson())
+                .request(query)
                     .successfully()
                         .resultMatchWith("src/test/resources/graphql/output/queries/pos_of_id_1.json");
 
@@ -42,7 +42,7 @@ public class POSQueryByIdTest {
         query.setId(52L);
 
         graphQL
-                .request(query.getJson())
+                .request(query)
                     .withErrors()
                         .resultMatchWith("src/test/resources/graphql/output/queries/pos_of_not_existing_id.json");
     }
@@ -55,7 +55,7 @@ public class POSQueryByIdTest {
 
 
         graphQL
-                .request(query.getJson())
+                .request(query)
                     .withErrors()
                         .resultMatchWith("src/test/resources/graphql/output/queries/pos_null_id.json");
 
