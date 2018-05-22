@@ -1,4 +1,4 @@
-#Nearby Beer
+# Nearby Beer
 
 Uma api em graphql para encotrar os ponto de vendas (de cervejas) mais próximo dado uma latitude e longitude. 
 
