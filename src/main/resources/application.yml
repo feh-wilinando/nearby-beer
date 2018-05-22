@@ -20,9 +20,9 @@ spring:
 spring:
   profiles: test
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE:nearby_beer_test}
-    username: '${POSTGRES_USER:ze_delivery}'
-    password: '${POSTGRES_PASSWORD:s3cr3t}'
+    url: jdbc:postgresql://${POSTGRES_TEST_HOST:localhost}:${POSTGRES_TEST_PORT:5432}/${POSTGRES_TEST_DATABASE:nearby_beer_test}
+    username: '${POSTGRES_TEST_USER:ze_delivery}'
+    password: '${POSTGRES_TEST_PASSWORD:s3cr3t}'
     initialization-mode: always
   jpa:
     show-sql: true
