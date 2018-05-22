@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  database:
+    image: mdillon/postgis
+    environment:
+      - POSTGRES_DB=nearby_beer
+      - POSTGRES_USER=ze_delivery
+      - POSTGRES_PASSWORD=s3cr3t
+    networks:
+      - nearby_beer
+
+  application:
+    image: wilinando/nearby-beer
+    environment:
+      - POSTGRES_HOST=database
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    depends_on:
+      - database
+    networks:
+      - nearby_beer
+
+networks:
+  nearby_beer:

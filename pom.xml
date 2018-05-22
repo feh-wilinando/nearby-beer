@@ -114,7 +114,60 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.github.fehwilinando.nearbybeer.NearbyBeerApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
 			</plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.3.7</version>
+                <configuration>
+                    <repository>wilinando/${project.artifactId}</repository>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+
+                        </goals>
+
+                        <configuration>
+                            <!--Replace this with CI automatic controller or use Maven release plugin to increase project version-->
+                            <tag>${project.version}</tag>
+
+                            <buildArgs>
+                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                            </buildArgs>
+
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>re-tagging-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>tag</goal>
+                        </goals>
+                        <configuration>
+                            <tag>latest</tag>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
 		</plugins>
 	</build>
 
